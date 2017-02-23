@@ -1,5 +1,5 @@
 <div>
-    <h3>栈详情:{{stack.stack_name}}</h3>
+    <h3>Stack Details:{{stack.stack_name}}</h3>
     <div class="col-sm-12" style="margin-top:20px;">
         <div class="container-fluid">
             <div class="row-fluid">
@@ -7,25 +7,25 @@
                     <div class="tabbable" id="tabs-829056">
                         <ul class="nav nav-tabs" style="margin-bottom:5px;">
                             <li class="active" style="width:100px;text-align:center">
-                                <a data-target="#showSummary" data-toggle="tab">概览</a>
+                                <a data-target="#showSummary" data-toggle="tab">OverView</a>
                             </li>
                             <li style="width:100px;text-align:center">
-                                <a data-target="#showResources" data-toggle="tab" ng-click="loadResource()">资源</a>
+                                <a data-target="#showResources" data-toggle="tab" ng-click="loadResource()">Resource</a>
                             </li>
                             <li style="width:100px;text-align:center">
-                                <a data-target="#showEvents" data-toggle="tab" ng-click="loadEvent()">事件</a>
+                                <a data-target="#showEvents" data-toggle="tab" ng-click="loadEvent()">Events</a>
                             </li>
                             <li style="width:100px;text-align:center">
-                                <a data-target="#showTemplates" data-toggle="tab" ng-click="loadTemplate()">模板</a>
+                                <a data-target="#showTemplates" data-toggle="tab" ng-click="loadTemplate()">Template</a>
                             </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="showSummary">
                                 <div ng-if="hasstack" ng-init="hasDetail = true" class="infoGroup">
-                                    <h4>基本信息</h4>
+                                    <h4>Stack Overview</h4>
                                     <hr class="header_rule">
                                     <dl>
-                                        <dt>名称</dt>
+                                        <dt>Name</dt>
                                         <dd>{{stack.stack_name}}</dd>
                                     </dl>
                                     <dl>
@@ -33,30 +33,30 @@
                                         <dd>{{stack.id}}</dd>
                                     </dl>
                                     <dl>
-                                        <dt>描述</dt>
+                                        <dt>Description</dt>
                                         <dd>{{stack.description}}</dd>
                                     </dl>
                                 </div>
                                 <div class="infoGroup">
-                                    <h4>状态</h4>
+                                    <h4>Status</h4>
                                     <hr class="header_rule">
                                     <dl>
-                                        <dt>已创建</dt>
+                                        <dt>Created</dt>
                                         <dd>
                                             {{stack.creation_time}}
                                         </dd>
                                     </dl>
                                     <dl>
-                                        <dt>最近更新</dt>
+                                        <dt>Last Updated</dt>
                                         <dd>{{stack.updated_time}}</dd>
                                     </dl>
                                     <dl>
-                                        <dt>状态</dt>
+                                        <dt>Status</dt>
                                         <dd>{{stack.stack_status}} ：{{stack.stack_status_reason}}</dd>
                                     </dl>
                                 </div>
                                 <div class="infoGroup">
-                                    <h4>输出</h4>
+                                    <h4>Outputs</h4>
                                     <hr class="header_rule">
                                     <div ng-repeat="instance in instancesGroup">
                                         <dl>
@@ -69,7 +69,7 @@
                                     </div>
                                 </div>
                                 <div class="infoGroup">
-                                    <h4>栈参数</h4>
+                                    <h4>Stack Parameters</h4>
                                     <hr class="header_rule">
                                     <dl>
                                         <dt>OS::project_id</dt>
@@ -109,14 +109,14 @@
                                     </dl>
                                 </div>
                                 <div class="infoGroup">
-                                    <h4>启动参数</h4>
+                                    <h4>Launch Parameters</h4>
                                     <hr class="header_rule">
                                     <dl>
-                                        <dt>超时</dt>
+                                        <dt>Timeout</dt>
                                         <dd>{{stack.timeout_mins}}分钟</dd>
                                     </dl>
                                     <dl>
-                                        <dt>回滚</dt>
+                                        <dt>Rollback</dt>
                                         <dd>
                                         <dd ng-if="stack.disable_rollback==true">已关闭</dd>
                                         <dd ng-if="stack.disable_rollback==false">未关闭</dd>
@@ -129,42 +129,41 @@
                                     <thead>
                                     <tr class="success">
                                         <th style="text-align:center"><input type="checkbox" id="selectAll"></th>
-                                        <th>栈资源</th>
-                                        <th>资源</th>
-                                        <th>栈资源类型</th>
-                                        <th>日期</th>
-                                        <th>状态</th>
-                                        <th>状态原因</th>
+                                        <th>Stack Resource</th>
+                                        <th>Resource</th>
+                                        <th>Stack Resource Type</th>
+                                        <th>Date Updated</th>
+                                        <th>Status</th>
+                                        <th>Status Reason</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr ng-repeat="resource in resourceList">
                                         <td style="text-align:center"><input type="checkbox"></td>
                                         <td>
-                                            <a href="#/viewResource?id={{stack.id}}&stackName={{stack.stack_name}}&resourceName={{resource.resource_name}}">{{resource.resource_name}}</a>
+                                            <a href="#/viewResource_en?id={{stack.id}}&stackName={{stack.stack_name}}&resourceName={{resource.resource_name}}">{{resource.resource_name}}</a>
                                         </td>
                                         <td>
                                             <a ng-if="resource.resource_type=='OS::Heat::ResourceGroup'"
-                                               force-Href="#/viewStack?id={{resource.physical_resource_id}}">{{resource.physical_resource_id}}</a>
+                                               force-Href="#/viewStack_en?id={{resource.physical_resource_id}}">{{resource.physical_resource_id}}</a>
                                             <a ng-if="resource.resource_type=='OS::Nova::Server'"
-                                               force-Href="#/viewInstance?id={{resource.physical_resource_id}}">{{resource.physical_resource_id}}</a>
+                                               force-Href="#/viewInstance_en?id={{resource.physical_resource_id}}">{{resource.physical_resource_id}}</a>
                                             <a ng-if="resource.resource_type=='OS::Neutron::Port'"
-                                               force-Href="#/viewPort?id={{resource.physical_resource_id}}">{{resource.physical_resource_id}}</a>
+                                               force-Href="#/viewPort_en?id={{resource.physical_resource_id}}">{{resource.physical_resource_id}}</a>
                                             <label
-                                                ng-if="resource.resource_type=='OS::Neutron::FloatingIP'">
+                                                    ng-if="resource.resource_type=='OS::Neutron::FloatingIP'">
                                                 {{resource.physical_resource_id}}
                                             </label>
                                         </td>
                                         <td>{{resource.resource_type}}</td>
                                         <td>{{resource.updated_time | date:'yyyy-MM-dd hh:mm:ss'}}</td>
                                         <td>
-                                            <dd ng-if="resource.resource_status=='CREATE_COMPLETE'">创建完成</dd>
-                                            <dd ng-if="resource.resource_status=='CREATE_IN_PROGRESS'">创建中</dd>
+                                            <dd ng-if="resource.resource_status=='CREATE_COMPLETE'">CREATE COMPLETE</dd>
+                                            <dd ng-if="resource.resource_status=='CREATE_IN_PROGRESS'">CREATE IN
+                                                PROGRESS
+                                            </dd>
                                         </td>
                                         <td>{{resource.resource_status_reason}}</td>
-                                        <!--<td>-->
-                                        <!--<button type="button" class="btn btn-primary btn-sm cellBtn">编辑</button>-->
-                                        <!--</td>-->
                                     </tr>
                                     </tbody>
                                 </table>
@@ -175,10 +174,10 @@
                                     <thead>
                                     <tr class="success">
                                         <th style="text-align:center"><input type="checkbox" id="selectAll1"></th>
-                                        <th>栈资源</th>
-                                        <th>事件后时间</th>
-                                        <th>状态</th>
-                                        <th>状态原因</th>
+                                        <th>Stack Resource</th>
+                                        <th>Time Since Event</th>
+                                        <th>Status</th>
+                                        <th>Status Reason</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -189,16 +188,15 @@
                                                 {{event.resource_name}}
                                             </label>
                                             <a ng-if="event.resource_name!=stack.stack_name"
-                                               href="#viewResource?id={{stack.id}}&stackName={{stack.stack_name}}&resourceName={{event.resource_name}}">{{event.resource_name}}</a>
+                                               href="#viewResource_en?id={{stack.id}}&stackName={{stack.stack_name}}&resourceName={{event.resource_name}}">{{event.resource_name}}</a>
                                         </td>
                                         <td>{{event.event_time| date:'yyyy-MM-dd hh:mm:ss'}}</td>
                                         <td>
-                                            <label style="margin:0px" ng-if="event.resource_status=='CREATE_COMPLETE'">
-                                                创建完成
-                                            </label>
-                                            <label style="margin:0px" ng-if="event.resource_status=='CREATE_IN_PROGRESS'">
-                                                创建中
-                                            </label>
+                                            <label style="margin:0px" ng-if="event.resource_status=='CREATE_COMPLETE'">CREATE
+                                                COMPLETE</label>
+                                            <label style="margin:0px"
+                                                   ng-if="event.resource_status=='CREATE_IN_PROGRESS'">CREATE IN
+                                                PROGRESS</label>
                                         </td>
                                         <td>{{event.resource_status_reason}}</td>
                                         <!--<td>-->
@@ -224,8 +222,8 @@
                     <div class="alert alert-error">
                         <button type="button" class="close" data-dismiss="alert">×</button>
                         <h4>
-                            提示!
-                        </h4> <strong>警告!</strong> {{errorMessage}}.
+                            Tips!
+                        </h4> <strong>Warning!</strong> {{errorMessage}}.
                     </div>
                 </div>
             </div>
