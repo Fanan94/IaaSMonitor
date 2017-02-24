@@ -12,7 +12,8 @@ angular.module('app.totalSummary', ['ngRoute'])
             controller: 'totalSummaryController'
         })
     }])
-    .controller('totalSummaryController', function ($q, $scope, $rootScope, endPointCollection, myHttpService, serviceListService, pageSwitch, endpointService) {
+    .controller('totalSummaryController', function ($q, $scope, $rootScope, endPointCollection, myHttpService, serviceListService, pageSwitch) {
+        $scope.text="";
         $scope.pageList = pageSwitch.pageList;
 
         if ($rootScope.isLog == undefined) {
@@ -32,15 +33,17 @@ angular.module('app.totalSummary', ['ngRoute'])
             var SecurityGroups = adminUrl + serviceListService.securitygroupDetail;
             var FloatingIP = adminUrl + serviceListService.ListFloatingIpAddresses;
 
-            var serverUrl = endPointCollection.adminURL('compute') + serviceListService.serviceDetail;
-            var flavorUrl = endPointCollection.adminURL('compute') + serviceListService.FlavorsDetail;
-            var promise1 = myHttpService.get('mainController', serverUrl);
-            var promise2 = myHttpService.get('mainController', flavorUrl);
+        var serverUrl = endPointCollection.adminURL('compute') + serviceListService.serviceDetail;
+        var flavorUrl = endPointCollection.adminURL('compute') + serviceListService.FlavorsDetail;
+        var promise1 = myHttpService.get('mainController', serverUrl);
+        var promise2 = myHttpService.get('mainController', flavorUrl);
+        var serverList = [];
 
-            $q.all([promise1, promise2]).then(function (response) {
-                var servers = response[0].data.servers;
-                var flavors = response[1].data.flavors;
-                var serverList = [];
+
+        $q.all([promise1, promise2]).then(function (response) {
+            var servers = response[0].data.servers;
+            var flavors = response[1].data.flavors;
+
 
                 for (var i = 0; i < servers.length; i++) {
                     var server = servers[i];
@@ -226,5 +229,26 @@ angular.module('app.totalSummary', ['ngRoute'])
                 }
                 return {'sortStr': sortStr};
             })();
+        }
+
+        $scope.search=function () {
+            $scope.serverLists=null;
+            var arry = [];
+            if ($scope.text != null) {fd6
+            for (i = 0; i < $scope.serverList.length; i++) {
+                    if ($scope.serverList[i].name.indexOf($scope.text) >= 0) {
+                        arry.push($scope.serverList[i]);
+                    }
+                }
+                $scope.serverList=arry;
+                $scope.text=null;
+            }
+            else if($scope.text == null){
+                myHttpService.get('mainController', serverUrl)
+                    .then(function (response) {
+                        $scope.serverList=response.data.servers;
+                    }, function (response){
+                    });
+            }
         }
     });
